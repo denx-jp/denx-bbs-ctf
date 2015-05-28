@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja" ng-app="app">
+    <head>
+        <meta charset="UTF-8">
+        <title>DENX 掲示板</title>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css">
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+        <script src="bbs.js"></script>
+    </head>
+    <body>
+        <header>
+            <nav>
+                <span class="brand-logo center">DENX掲示板</span>
+                <span class="right">みんなでワイワイ会話しよう！</span>
+            </nav>
+        </header>
+        <div class="container" ng-controller="AppController">
+
+            <ul class="collection with-header">
+                <li class="collection-header">
+                    <h5><i class="small mdi-action-view-list"></i>書き込み一覧</h5>
+                    <button class="btn" ng-click="clear()">書き込みを全消去</button>
+                </li>
+                
+                <li class="collection-item" ng-repeat="post in posts track by $index">
+                    <i class="tiny mdi-social-person">&nbsp;</i>{{post.author }}：<span ng-bind-html="post.message"></span>
+                </li>
+            </ul>
+            <form class="col s12" ng-submit="onPost()">
+                <div class="row">
+                    <div class="input-field col s3">
+                        <i class="mdi-editor-mode-edit prefix"></i>
+                        <input type="text" class="validate" ng-model="author">
+                        <label for="icon_prefix">名前</label>
+                    </div>
+                    <div class="input-field col s9">
+                        <input type="text" class="validate" ng-model="message">
+                        <label for="icon_telephone">内容</label>
+                    </div>
+                </div>
+                <button class="btn" type="submit" name="action">投稿</button>
+            </form>
+        </div>
+    </body>
+</html>
